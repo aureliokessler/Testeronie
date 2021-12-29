@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 public class SwitchProController : MonoBehaviour
 {
     public Camera cam;
-    public float speedMovement = 10.2f;
-    public float speedJump = 7.2f;
-    public float speedRotation = 5.7f;
+    public float speedMovement = 0.1f;
+    public float speedJump = 5f;
+    public float speedRotation = 0.1f;
     public float maxJumpHeight = 1f;
     
     private float _playerHeight;
@@ -38,6 +38,20 @@ public class SwitchProController : MonoBehaviour
         var lookAt = new Vector3( cam.transform.forward.x, 0f, cam.transform.forward.z) * speedRotation * Time.deltaTime;
         transform.rotation = Quaternion.LookRotation(lookAt, cam.transform.up);
     }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        _isGround = collision.gameObject.layer == LayerMask.NameToLayer($"Ground");
+        if (_isGround)
+        {
+            _playerHeight = _rb.position.y;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        _isGround = false;
+    }
 
     public void Move(InputAction.CallbackContext context)
     {
@@ -59,20 +73,6 @@ public class SwitchProController : MonoBehaviour
         var actualMaxJumpHeight = _playerHeight + maxJumpHeight;
             
         _rb.AddForce(Vector3.up * speedJump, ForceMode.Impulse);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        _isGround = collision.gameObject.layer == LayerMask.NameToLayer($"Ground");
-        if (_isGround)
-        {
-            _playerHeight = _rb.position.y;
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        _isGround = false;
     }
 
     public void Event(InputAction.CallbackContext context) 
