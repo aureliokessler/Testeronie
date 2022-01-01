@@ -13,22 +13,30 @@ public class SwitchProController : MonoBehaviour
     private float _playerHeight;
     private Vector3 _currentMovementDirection = Vector3.zero;
     // private Vector3 _currentJumpVelocity = Vector3.zero;
-    
-    private Rigidbody _rb;
     private bool _isGround;
     
+    private Rigidbody _rb;
+    private Animator _animator;
+    private static readonly int WalkSpeed = Animator.StringToHash("walkSpeed");
+    private static readonly int IsWalking = Animator.StringToHash("isWalking");
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
 
     private void FixedUpdate()
     {
         // player movemend
+        var magnitude = Vector3.Magnitude(_currentMovementDirection);
+        _animator.SetBool(IsWalking, magnitude >= 0.5f);
+        _animator.SetFloat(WalkSpeed, magnitude);
+
         _rb.MovePosition( Vector3.Lerp(_rb.position, _rb.position + _currentMovementDirection * speedMovement, Time.fixedTime) );
-            
+        
         // player Jump
     }
 
@@ -71,7 +79,7 @@ public class SwitchProController : MonoBehaviour
 
         // jump height
         var actualMaxJumpHeight = _playerHeight + maxJumpHeight;
-            
+        
         _rb.AddForce(Vector3.up * speedJump, ForceMode.Impulse);
     }
 

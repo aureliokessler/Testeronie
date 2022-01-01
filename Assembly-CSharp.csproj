@@ -52,15 +52,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\InputActions\Default Inputs.cs" />
-     <Compile Include="Assets\Scripts\Inventory.cs" />
-     <Compile Include="Assets\Scripts\IInteractable.cs" />
-     <Compile Include="Assets\Scripts\Door.cs" />
-     <Compile Include="Assets\Scripts\SwitchProController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Prefabs\Player\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\KeyItem.cs" />
+     <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Prefabs\Coind\CoindController.cs" />
+     <Compile Include="Assets\Scripts\IInteractable.cs" />
+     <Compile Include="Assets\Scripts\SwitchProController.cs" />
+     <Compile Include="Assets\Scripts\Door.cs" />
+     <Compile Include="Assets\Prefabs\Player\PlayerController.cs" />
+     <Compile Include="Assets\InputActions\Default Inputs.cs" />
+     <Compile Include="Assets\Scripts\KeyItem.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
