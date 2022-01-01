@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Door : MonoBehaviour, IInteractable
 {
     private GameManager _gameManager;
@@ -40,7 +39,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
-            _gameManager.SetActionText("Pleas  get a key to Open this door!");
+            _gameManager.SetActionText("Pleas get a key to Open this door!");
         }
 
         return false;
