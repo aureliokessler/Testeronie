@@ -120,16 +120,6 @@ public class ThirdPersonController : MonoBehaviour
         Interact();
     }
 
-    private void Interact()
-    {
-        if (_input.interact)
-        {
-            Debug.Log("Event is triggered!");
-        }
-
-        _input.interact = false;
-    }
-
     private void LateUpdate()
     {
         CameraRotation();
@@ -239,6 +229,16 @@ public class ThirdPersonController : MonoBehaviour
             _animator.SetFloat(_animIDSpeed, _animationBlend);
             _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
         }
+    }
+
+    private void Interact()
+    {
+        if (_input.interact)
+        {
+            GameManager.ActionGameObject.Run();
+        }
+
+        _input.interact = false;
     }
 
     private void JumpAndGravity()
