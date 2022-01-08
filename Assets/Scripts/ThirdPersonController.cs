@@ -1,15 +1,11 @@
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
 [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM
-	[RequireComponent(typeof(PlayerInput))]
-#endif
+[RequireComponent(typeof(PlayerInput))]
 public class ThirdPersonController : MonoBehaviour
 {
     [Header("Player")] [Tooltip("Move speed of the character in m/s")]
@@ -90,7 +86,7 @@ public class ThirdPersonController : MonoBehaviour
     private Animator _animator;
     private CharacterController _controller;
     private ControlBindings _input;
-    private GameObject _mainCamera;
+    private Transform _mainCamera;
 
     private const float _threshold = 0.01f;
 
@@ -98,11 +94,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Awake()
     {
-        // get a reference to our main camera
-        if (_mainCamera == null)
-        {
-            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        }
+        _mainCamera = Camera.main.transform;
     }
 
     private void Start()
@@ -125,6 +117,17 @@ public class ThirdPersonController : MonoBehaviour
         JumpAndGravity();
         GroundedCheck();
         Move();
+        Interact();
+    }
+
+    private void Interact()
+    {
+        if (_input.interact)
+        {
+            Debug.Log("Event is triggered!");
+        }
+
+        _input.interact = false;
     }
 
     private void LateUpdate()
@@ -134,7 +137,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void AssignAnimationIDs()
     {
-        _animIDSpeed = Animator.StringToHash("Speed");
+        _animIDSpeed = Animator.StringToHash("walkSpeed");
         _animIDGrounded = Animator.StringToHash("Grounded");
         _animIDJump = Animator.StringToHash("Jump");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
@@ -215,7 +218,7 @@ public class ThirdPersonController : MonoBehaviour
         if (_input.move != Vector2.zero)
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                              _mainCamera.transform.eulerAngles.y;
+                              _mainCamera.eulerAngles.y;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                 RotationSmoothTime);
 

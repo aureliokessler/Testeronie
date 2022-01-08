@@ -42,10 +42,19 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Event",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "927ec26d-0a3a-4aa9-8d19-69e1ba6929da",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "f6526a21-7df4-409b-bbe8-ddd57af4e85b",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -57,7 +66,7 @@
                     "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
@@ -189,7 +198,7 @@
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "InvertVector2(invertX=false),StickDeadzone,ScaleVector2(x=300,y=300)",
                     "groups": ";Gamepad",
                     "action": "Look",
                     "isComposite": false,
@@ -200,7 +209,7 @@
                     "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
                     "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=15,y=15)",
                     "groups": ";Keyboard&Mouse;Touch",
                     "action": "Look",
                     "isComposite": false,
@@ -301,7 +310,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Event",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -312,7 +321,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Event",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3c934b8-64ee-4b4e-b31a-c7e4d1693e1e",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b43bc9de-c6fc-42d0-82fa-f5a66b9448eb",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

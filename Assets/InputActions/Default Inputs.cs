@@ -64,10 +64,19 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Event"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""927ec26d-0a3a-4aa9-8d19-69e1ba6929da"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f6526a21-7df4-409b-bbe8-ddd57af4e85b"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -79,7 +88,7 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""id"": ""978bfe49-cc26-4a3d-ab7b-7d7a29327403"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -211,7 +220,7 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""InvertVector2(invertX=false),StickDeadzone,ScaleVector2(x=300,y=300)"",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -222,7 +231,7 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2(x=15,y=15)"",
                     ""groups"": "";Keyboard&Mouse;Touch"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -323,7 +332,7 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Event"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -334,7 +343,29 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Event"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3c934b8-64ee-4b4e-b31a-c7e4d1693e1e"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b43bc9de-c6fc-42d0-82fa-f5a66b9448eb"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -926,7 +957,8 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Event = m_Player.FindAction("Event", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1002,7 +1034,8 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Event;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Sprint;
     public struct PlayerActions
     {
         private @DefaultInputs m_Wrapper;
@@ -1011,7 +1044,8 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Event => m_Wrapper.m_Player_Event;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1033,9 +1067,12 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Event.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvent;
-                @Event.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvent;
-                @Event.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvent;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1052,9 +1089,12 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Event.started += instance.OnEvent;
-                @Event.performed += instance.OnEvent;
-                @Event.canceled += instance.OnEvent;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -1215,7 +1255,8 @@ public partial class @DefaultInputs : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnEvent(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

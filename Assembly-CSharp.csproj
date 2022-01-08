@@ -52,6 +52,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ThirdPersonController.cs" />
+     <Compile Include="Assets\Scripts\ControlBindings.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Prefabs\Coind\CoindController.cs" />
@@ -60,8 +62,6 @@
      <Compile Include="Assets\Prefabs\Player\PlayerController.cs" />
      <Compile Include="Assets\InputActions\Default Inputs.cs" />
      <Compile Include="Assets\Scripts\KeyItem.cs" />
-     <Compile Include="Assets\Scripts\ControlBindings.cs" />
-     <Compile Include="Assets\Scripts\ThirdPersonController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -691,6 +691,15 @@
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
  <HintPath>/Users/aureliokessler/Documents/UnityProjects/Testeronie/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Toolchain.Macos-x86_64-Linux-x86_64">
+ <HintPath>/Users/aureliokessler/Documents/UnityProjects/Testeronie/Library/ScriptAssemblies/Unity.Toolchain.Macos-x86_64-Linux-x86_64.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Sysroot.Linux_x86_64">
+ <HintPath>/Users/aureliokessler/Documents/UnityProjects/Testeronie/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.SysrootPackage.Editor">
+ <HintPath>/Users/aureliokessler/Documents/UnityProjects/Testeronie/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
