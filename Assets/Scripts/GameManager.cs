@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,11 +7,17 @@ public class GameManager : MonoBehaviour
     public static IInteractable ActionGameObject;
     public static int Score;
 
+    [Header("Panel's")]
     public GameObject winPanel;
-    public TMP_Text scoreText;
-    public float delay = 5f;
-    public TMP_Text actionText;
     public GameObject actionPanel;
+    public GameObject pauseMenu;
+    
+    [Header("Text Field's")]
+    public TMP_Text scoreText;
+    public TMP_Text actionText;
+    
+    [Header("Option's")]
+    public float delay = 5f;
 
     public int winningScore;
 
@@ -48,5 +55,19 @@ public class GameManager : MonoBehaviour
         {
             winPanel.SetActive(true);
         }
+    }
+
+    public void ActivatePauseMenu()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        print("You have click Exit Game!");
+#else
+        Application.Quit();
+#endif
     }
 }
