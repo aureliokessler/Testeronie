@@ -16,32 +16,32 @@ public class ControlBindings : MonoBehaviour
     public bool cursorInputForLook = true;
 #endif
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext value)
     {
-        MoveInput(value.Get<Vector2>());
+        MoveInput(value.ReadValue<Vector2>());
     }
 
-    public void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext value)
     {
         if (cursorInputForLook)
         {
-            LookInput(value.Get<Vector2>());
+            LookInput(value.ReadValue<Vector2>());
         }
     }
 
-    public void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext value)
     {
-        JumpInput(value.isPressed);
+        JumpInput(value.action.triggered);
     }
 
-    public void OnSprint(InputValue value)
+    public void OnSprint(InputAction.CallbackContext value)
     {
-        SprintInput(value.isPressed);
+        SprintInput(value.action.triggered);
     }
 
-    public void OnInteract(InputValue value)
+    public void OnInteract(InputAction.CallbackContext value)
     {
-        InteractInput(value.isPressed);
+        InteractInput(value.action.triggered);
     }
         
 
