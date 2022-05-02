@@ -273,6 +273,8 @@ public class ThirdPersonController : MonoBehaviour
             {
                 _jumpTimeoutDelta -= Time.deltaTime;
             }
+
+            _input.jump = false;
         }
         else
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CoindController : MonoBehaviour
+public class CoinController : MonoBehaviour
 {
     public GameManager gameManager;
     private void OnCollisionEnter(Collision other)
