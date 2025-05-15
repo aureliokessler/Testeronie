@@ -94,9 +94,15 @@ public class ThirdPersonController : MonoBehaviour
 
     private bool _hasAnimator;
 
+    private GameManager gameManager;
+
+
     private void Awake()
     {
-        _mainCamera = Camera.main.transform;
+        if (_mainCamera == null)
+        {
+            _mainCamera = Camera.main.transform;
+        }
     }
 
     private void Start()
@@ -104,6 +110,9 @@ public class ThirdPersonController : MonoBehaviour
         _hasAnimator = TryGetComponent(out _animator);
         _controller = GetComponent<CharacterController>();
         _input = GetComponent<ControlBindings>();
+        
+        gameManager = FindFirstObjectByType<GameManager>();
+
 
         AssignAnimationIDs();
 
@@ -118,6 +127,7 @@ public class ThirdPersonController : MonoBehaviour
         JumpAndGravity();
         Move();
         Interact();
+        Pause();
     }
 
     private void LateUpdate()
@@ -232,6 +242,18 @@ public class ThirdPersonController : MonoBehaviour
         if (_input.interact)
         {
             GameManager.ActionGameObject?.Run();
+        }
+    }
+
+    private void Pause()
+    {
+        if (_input.pause)
+        {
+            gameManager.SetPauseMenu(true);
+        }
+        else
+        {
+            gameManager.SetPauseMenu(false);
         }
     }
 

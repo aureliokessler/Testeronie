@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -19,9 +18,12 @@ public class GameManager : MonoBehaviour
     [Header("Option's")]
     public float delay = 5f;
 
-    public int winningScore;
+    [SerializeField]
+    private int _winningScore;
 
     private float _timelapse;
+
+    private bool _gameInPause = false;
 
     public void SetActionText(string text)
     {
@@ -51,15 +53,16 @@ public class GameManager : MonoBehaviour
             _timelapse = 0;
         }
 
-        if (Score >= winningScore)
+        if (Score >= _winningScore)
         {
             winPanel.SetActive(true);
         }
     }
 
-    public void ActivatePauseMenu()
+    public void SetPauseMenu(bool value)
     {
-        pauseMenu.SetActive(true);
+        _gameInPause = value;
+        pauseMenu.SetActive(value);
     }
 
     public void ExitGame()

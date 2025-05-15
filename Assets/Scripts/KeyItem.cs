@@ -6,7 +6,7 @@ public class KeyItem : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void OnTriggerEnter(Collider other)

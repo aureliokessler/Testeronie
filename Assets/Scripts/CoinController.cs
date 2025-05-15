@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class CoinController : MonoBehaviour
 {
-    public GameManager gameManager;
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = FindFirstObjectByType<GameManager>();
+    }
     private void OnCollisionEnter(Collision other)
     {
-        gameManager.AddScoreValue(1);
+        _gameManager.SetActionText("You grapped a coin!");
+        _gameManager.AddScoreValue(1);
         Destroy(gameObject);
     }
 }

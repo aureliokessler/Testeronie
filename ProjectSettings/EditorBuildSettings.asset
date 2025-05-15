@@ -4,6 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Testeroni.unity
+    guid: bb33465dc67174bd386ed2bbb536a6a3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: de1107d287b6544cf80b02a739e10ed6, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1a5a37ce01b9a48ad857babba567de2c, type: 3}
+  m_UseUCBPForAssetBundles: 0

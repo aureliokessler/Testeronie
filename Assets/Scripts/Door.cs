@@ -9,7 +9,7 @@ public class Door : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager = FindFirstObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
     }
     

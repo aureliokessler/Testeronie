@@ -3,16 +3,20 @@ using UnityEngine.InputSystem;
 
 public class ControlBindings : MonoBehaviour
 {
-    [Header("Character Input Values")] public Vector2 move;
+    [Header("Character Input Values")]
+    public Vector2 move;
     public Vector2 look;
     public bool jump;
     public bool sprint;
     public bool interact;
+    public bool pause;
 
-    [Header("Movement Settings")] public bool analogMovement;
+    [Header("Movement Settings")]
+    public bool analogMovement;
 
 #if !UNITY_IOS || !UNITY_ANDROID
-    [Header("Mouse Cursor Settings")] public bool cursorLocked = true;
+    [Header("Mouse Cursor Settings")]
+    public bool cursorLocked = true;
     public bool cursorInputForLook = true;
 #endif
 
@@ -43,7 +47,12 @@ public class ControlBindings : MonoBehaviour
     {
         InteractInput(value.action.triggered);
     }
-        
+
+    public void OnPause(InputAction.CallbackContext value)
+    {
+        PauseInput(value.action.triggered);
+    }
+
 
     public void MoveInput(Vector2 newMoveDirection)
     {
@@ -63,6 +72,11 @@ public class ControlBindings : MonoBehaviour
     public void SprintInput(bool newSprintState)
     {
         sprint = newSprintState;
+    }
+
+    private void PauseInput(bool newEventState)
+    {
+        pause = newEventState;
     }
 
     private void InteractInput(bool newEventState)
